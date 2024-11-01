@@ -18,10 +18,8 @@ Este documento fornece uma visão geral de como instalar e configurar o sistema.
    ```
 
 2. **Instale as depencências**
-    ```
-    composer install
-    ```
-3. ** Configuração do Banco de Dados **
+    ```composer install```
+3. **Configuração do Banco de Dados**
     - Configure o arquivo .env:
 
 ```
@@ -96,19 +94,15 @@ VITE_APP_NAME="${APP_NAME}"
 API_CHAT_SOCKET_URL=http://localhost:7000/
 ```
 - Rode as migrações para criar as tabelas no banco de dados.
-```
-php artisan migrate
-```
+  
+```php artisan migrate```
 
-4. ** Configuração CSRF para Rota de API **
+4. **Configuração CSRF para Rota de API**
    - Devido à atualização do Laravel, é necessário adicionar a rota api/* à lista de exceções CSRF.
    - Abra o arquivo ```VerifyCsrfToken.php``` em:
-     ```
-      vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php
-     ```
+     ```vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php```
+     
    - Adicione a rota ``` api/* ``` na propriedade ``` $except ```, como mostrado abaixo:
-     ```
-     protected $except = ['api/*'];
-    ```
+     ```protected $except = ['api/*'];```
 
-5. ** Após estas configurações, o backend estará pronto, mas ainda falta instalar as dependências do frontend e da api de socket, a documentação de ambos explicará como **
+5. **Após estas configurações, o backend estará pronto, mas ainda falta instalar as dependências do frontend e da api de socket, a documentação de ambos explicará como**
