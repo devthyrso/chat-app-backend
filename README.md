@@ -13,7 +13,7 @@ Este documento fornece uma visão geral de como instalar e configurar o sistema.
 
 1. **Clone o Repositório**
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git clone https://github.com/devthyrso/chat-app-backend.git
    cd seu-repositorio
    ```
 
