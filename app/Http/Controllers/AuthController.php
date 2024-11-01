@@ -6,6 +6,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -68,11 +69,18 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         try {
-            $request->user()->tokens()->delete();
+            $user = Auth::user();
 
-            return response(['message' => 'Logout realizado com sucesso', 'userId' => $request->user()->id], 200);
+            if ($user) {
+                $user->tokens()->delete();
+                return response(['message' => 'Logout realizado com sucesso', 'userId' => $user->id], 200);
+            } else {
+                return response()->json(['error' => 'Usuário não autenticado'], 401);
+            }
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Erro ao realizar logout', 'message' => $e->getMessage()], 500);
         }
     }
 }
